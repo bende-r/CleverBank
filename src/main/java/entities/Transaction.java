@@ -1,2 +1,4 @@
-package entities;public class Transaction {
+package entities;
+
+public class Transaction {
 }

@@ -3,14 +3,14 @@ plugins {
     id("application")
 }
 
-group = "CleverBankApp"
+group = "com.CleverBank"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 application {
-    mainClassName = 'CleverBankApp.CleverBankApp'
+    mainClassName = 'com.CleverBank.CleverBankApp'
 }
 
 dependencies {

@@ -26,21 +26,22 @@ VALUES ('Anna', 'Smirnova', 'Andreevna'),
        ('Evgenia', 'Semenova', 'Artemovna'),
        ('Ilya', 'Kovalev', 'Sergeevich'),
        ('Elena', 'Savelieva', 'Mikhailovna');
-/*
+
 DO
 $$
     DECLARE
-        i integer := 1;
+        i          integer   := 1;
+        currencies varchar[] := ARRAY ['USD', 'EUR', 'RUB', 'BYN'];
     BEGIN
-        -- Цикл для вставки данных
-        WHILE i <= 4
+        WHILE i <= 40
             LOOP
                 INSERT INTO cleverbank.scores (score_number, bank_id, currency, balance, user_id)
-                VALUES (LPAD(FLOOR(random() * 10000000000)::text, 10, '0'), LPAD(FLOOR(random() * 10)::text, 1, '0'),
-                        'USD',
-                        LPAD(FLOOR(random() * 1000000)::text, 6, '0'), LPAD(FLOOR(random() * 100)::text, 2, '0'));
+                VALUES (LPAD(FLOOR(random() * 10000000000)::text, 10, '0')::text,
+                        random() * 4 + 1,
+                        currencies[1 + floor(random() * 4)],
+                        LPAD(FLOOR(random() * 1000000)::text, 6, '0')::money,
+                        random() * 19 + 1);
                 i := i + 1;
             END LOOP;
     END
 $$;
-*/

@@ -3,10 +3,8 @@ package CleverBankApp;
 import JDBC.SQLFileExecuter;
 import JDBC.SQLFileReader;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -16,11 +14,15 @@ public class CleverBankApp {
     static final String PASS = "postgres";
 
     public static void main(String[] argv) {
-
         SQLFileReader sqlFileReader = new SQLFileReader();
         Scanner in = new Scanner(System.in);
 
         System.out.println("Testing connection to PostgreSQL JDBC");
+
+        Class<?> clazz = CleverBankApp.class;
+        String className = clazz.getName();
+        System.out.println("Полное имя класса: " + className);
+
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -40,7 +42,7 @@ public class CleverBankApp {
             String c = in.nextLine();
 
             try {
-                if (c.equals("Y") | c.equals("y")) {
+                if (c.toLowerCase().equals("y")) {
                     String path = new File("src/main/sql/createdb.sql").getAbsolutePath();
                     SQLFileExecuter.SQLFileExecuter(path, statement);
                 }
@@ -52,7 +54,7 @@ public class CleverBankApp {
             c = in.nextLine();
 
             try {
-                if (c.equals("Y") | c.equals("y")) {
+                if (c.toLowerCase().equals("y")) {
                     String path = new File("src/main/sql/filldb.sql").getAbsolutePath();
                     SQLFileExecuter.SQLFileExecuter(path, statement);
                 }

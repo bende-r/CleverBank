@@ -1,11 +1,14 @@
 package com.CleverBank;
 
 import DataOperations.ScoreOperations;
+import JDBC.SQLFileExecuter;
 import JDBC.SQLFileReader;
 
+import java.io.File;
 import java.sql.*;
 import java.util.Scanner;
 
+import static DataOperations.CRUD.selectRow;
 import static DataOperations.CRUD.showTable;
 import static java.sql.DriverManager.getConnection;
 
@@ -30,8 +33,8 @@ public class CleverBankApp {
         }
 
         System.out.println("PostgreSQL JDBC Driver successfully connected");
-
-      /*  System.out.println("Enter PostgreSQL Username:");
+        /*
+        System.out.println("Enter PostgreSQL Username:");
         final String USER = in.nextLine();
 
         System.out.println("Enter password:");
@@ -42,14 +45,15 @@ public class CleverBankApp {
 
 
             System.out.println("You are connected to the database");
-
-          /*  System.out.print("Generate a database? Y/N\n");
+/*
+            System.out.print("Generate a database? Y/N\n");
             String c = in.nextLine();
+
 
             try {
                 if (c.toLowerCase().equals("y")) {
                     String path = new File("src/main/sql/createdb.sql").getAbsolutePath();
-                    SQLFileExecuter.SQLFileExecuter(path, statement);
+                    SQLFileExecuter.sqlfileexecuter(path, connection);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -61,13 +65,13 @@ public class CleverBankApp {
             try {
                 if (c.toLowerCase().equals("y")) {
                     String path = new File("src/main/sql/filldb.sql").getAbsolutePath();
-                    SQLFileExecuter.SQLFileExecuter(path, statement);
+                    SQLFileExecuter.sqlfileexecuter(path, connection);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-*/
 
+*/
             String scoreNumber;
             int deposit;
             while (true) {
@@ -116,7 +120,8 @@ public class CleverBankApp {
 
     public static void tableMenu(Connection connection) {
         int point;
-        String tableName;
+        String tableName, field, value;
+
         loop:
         while (true) {
             printTableMenu();
@@ -125,10 +130,7 @@ public class CleverBankApp {
             switch (point) {
                 case 1:
                     try {
-                        System.out.println("-----Tables list-----");
-                        System.out.println("Banks");
-                        System.out.println("Users");
-                        System.out.println("Scores");
+                        printTableList();
                         System.out.print("Enter the name of the table you want to view:");
                         tableName = in.next();
                         showTable(connection, tableName.toLowerCase());
@@ -139,6 +141,20 @@ public class CleverBankApp {
                     }
                     break;
                 case 2:
+                    try {
+                        printTableList();
+                        System.out.print("Enter the name of the table from which you want to get an entry:");
+                        tableName = in.next();
+                        System.out.print("Enter the name of the field by which the selection will take place:");
+                        field = in.next();
+                        System.out.print("Enter the value by which the selection will take place:");
+                        value = in.next();
+                        selectRow(connection, tableName, field, value);
+                    } catch (SQLException e) {
+                        System.out.println("The table could not be output");
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     break;
@@ -163,6 +179,13 @@ public class CleverBankApp {
         System.out.println("1. Score operations");
         System.out.println("2. Tables operations");
         System.out.println("3. Exit");
+    }
+
+    public static void printTableList() {
+        System.out.println("-----Tables list-----");
+        System.out.println("Banks");
+        System.out.println("Users");
+        System.out.println("Scores");
     }
 
     public static void printTableMenu() {

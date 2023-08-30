@@ -1,17 +1,18 @@
 package entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class User {
-    private String userFIO;
+    public final String userName;
+    public final String userSurname;
+    public final String userMiddlename;
 
-    public User(String FIO){
-        this.userFIO = FIO;
-    }
-
-    public String getUserFIO(){
-        return this.userFIO;
-    }
-
-    public void setUserFIO(String FIO){
-        this.userFIO = FIO;
+    public User(String name, String surname, String middlename) {
+        this.userName = name;
+        this.userSurname = surname;
+        this.userMiddlename = middlename;
     }
 }

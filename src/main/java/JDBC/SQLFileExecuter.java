@@ -3,8 +3,7 @@ package JDBC;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -31,8 +30,10 @@ public class SQLFileExecuter {
         reader.close();
     }*/
 
-    public static void SQLFileExecuter(String path, Statement statement) {
+    public static void sqlfileexecuter(String path, Connection connection) throws SQLException {
+        Statement statement = null;
         try {
+            statement = connection.createStatement();
             // Чтение SQL-скрипта из файла
             BufferedReader reader = new BufferedReader(new FileReader(path));
             String line;
@@ -47,9 +48,11 @@ public class SQLFileExecuter {
             statement.execute(script.toString());
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Request execution failed");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("File reading failed");
+        } finally {
+            statement.close();
         }
     }
 }

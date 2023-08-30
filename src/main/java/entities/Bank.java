@@ -1,17 +1,17 @@
 package entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+
 public class Bank {
-    private String name;
+    public final String name;
+    public final int id;
 
-    public Bank (String name){
+    public Bank(String name, int id) {
         this.name = name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return this.name;
+        this.id = id;
     }
 }

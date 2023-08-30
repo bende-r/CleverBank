@@ -102,6 +102,22 @@ public class CRUD {
         }
     }
 
+    public static void selectRow(Connection connection, String tableName, String field, String value) throws SQLException {
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("BEGIN; SELECT * FROM cleverbank." + tableName + " WHERE " + field + " = CAST('" + value + "' AS SELECT data_type\n" +
+                    "FROM information_schema.columns\n" +
+                    "WHERE table_name = '" + tableName + "' AND column_name = ' " + field + "'); COMMIT ;");
+        } catch (SQLException e) {
+            System.out.println("Select operation failed");
+            statement.executeUpdate("ROLLBACK;");
+
+        } finally {
+            statement.close();
+        }
+    }
+
     public static void showTable(Connection connection, String tableName) throws SQLException {
         Statement statement = null;
         try {

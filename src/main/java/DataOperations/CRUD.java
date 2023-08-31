@@ -9,8 +9,8 @@ public class CRUD {
         try {
             statement = connection.createStatement();
 
-            String command = "BEGIN; INSERT INTO " + tableName + " ( ";
-            for (int i = 1; i < colNames.size(); i++) {
+            String command = "BEGIN; INSERT INTO cleverbank." + tableName + " ( ";
+            for (int i = 0; i < colNames.size(); i++) {
                 if (colNames.size() - 1 != i)
                     command = command + " " + colNames.get(i) + ", ";
                 else
@@ -39,8 +39,11 @@ public class CRUD {
             }
             command = command + "; COMMIT;";
             statement.executeUpdate(command);
+            System.out.println("Row has been added to the table");
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             System.out.println("Insert operation failed");
+
             statement.execute("ROLLBACK; ");
         } finally {
             statement.close();
@@ -52,7 +55,7 @@ public class CRUD {
         try {
             statement = connection.createStatement();
 
-            String command = "BEGIN; UPDATE " + tableName + " SET ";
+            String command = "BEGIN; UPDATE cleverbank." + tableName + " SET ";
             for (int i = 0; i < data.size() && data.get(i) != ""; i++) {
                 if (tryParseInt(data.get(i)) || (tryParseDouble(data.get(i)))) {
                     if (data.size() - 1 == i) {
@@ -79,8 +82,9 @@ public class CRUD {
                 }
             }
 
-
+            System.out.println("Row has been updated in the table");
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             System.out.println("Update operation failed");
             statement.executeUpdate("ROLLBACK; ");
         } finally {
@@ -92,8 +96,10 @@ public class CRUD {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("BEGIN; DELETE * FROM cleverbank." + tableName + " WHERE id =" + id + "; COMMIT ;");
+            statement.executeUpdate("BEGIN; DELETE FROM cleverbank." + tableName + " WHERE id =" + id + "; COMMIT ;");
+            System.out.println("Row has been deleted from the table");
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             System.out.println("Delete operation failed");
             statement.executeUpdate("ROLLBACK;");
 
@@ -103,18 +109,46 @@ public class CRUD {
     }
 
     public static void selectRow(Connection connection, String tableName, String field, String value) throws SQLException {
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         try {
-            statement = connection.createStatement();
-            statement.executeUpdate("BEGIN; SELECT * FROM cleverbank." + tableName + " WHERE " + field + " = CAST('" + value + "' AS SELECT data_type\n" +
-                    "FROM information_schema.columns\n" +
-                    "WHERE table_name = '" + tableName + "' AND column_name = ' " + field + "'); COMMIT ;");
-        } catch (SQLException e) {
-            System.out.println("Select operation failed");
-            statement.executeUpdate("ROLLBACK;");
+            String typeSearch = "SELECT data_type FROM information_schema.columns WHERE table_name = '" + tableName + "' AND column_name = '" + field + "';";
+            preparedStatement = connection.prepareStatement(typeSearch);
 
-        } finally {
+            // Выполняем запрос и получаем результат
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Получаем метаданные результата
+            resultSet.next();
+            Object columnValue = resultSet.getObject(1);
+            String newtype = columnValue.toString();
+            preparedStatement.close();
+
+            String command = " SELECT * FROM cleverbank." + tableName + " WHERE " + field + " = '" + value + "'::" + newtype + "; ";
+
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(command);
+
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+
+            for (int i = 1; i <= columnCount; i++)
+                System.out.print(metaData.getColumnName(i) + "\t");
+
+            System.out.println();
+
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnCount; i++)
+                    System.out.print(resultSet.getString(i) + "\t");
+                System.out.println();
+            }
+
+            // Закрываем ресурсы
+            resultSet.close();
             statement.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Select operation failed");
         }
     }
 
@@ -126,23 +160,49 @@ public class CRUD {
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
 
-            for (int i = 1; i <= columnCount; i++) {
+            for (int i = 1; i <= columnCount; i++)
                 System.out.print(metaData.getColumnName(i) + "\t");
-            }
+
             System.out.println();
 
             while (resultSet.next()) {
-                for (int i = 1; i <= columnCount; i++) {
+                for (int i = 1; i <= columnCount; i++)
                     System.out.print(resultSet.getString(i) + "\t");
-                }
                 System.out.println();
             }
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             System.out.println("The table could not be output");
         }
     }
+
+    public static ArrayList<String> getColNames(Connection connection, String tableName) {
+        Statement statement = null;
+        ArrayList<String> colNames = null;
+        try {
+            statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("SELECT column_name FROM information_schema.columns WHERE table_name = '" + tableName + "';");
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            colNames = new ArrayList<String>(columnCount);
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnCount; i++)
+                    colNames.add(resultSet.getString(i));
+            }
+            resultSet.close();
+            statement.close();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get column names");
+        }
+        return colNames;
+    }
+
 
     private static boolean tryParseInt(String str) {
         try {

@@ -1,10 +1,0 @@
-
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ëÆæôøÿÿÿÿ8åö½³¤1
-d
-java:S2259"GA "NullPointerException" could be thrown; "statement" is nullable here.(ºÌøÚ8îö½³¤1
-i
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8îö½³¤1
-\
-java:S1118	":Add a private constructor to hide the implicit public one.(’ÓÚıÿÿÿÿ8ïö½³¤1
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(À»˜›úÿÿÿÿ8ñö½³¤1
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8òö½³¤1

@@ -1,0 +1,32 @@
+
+{
+java:S2293i"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘£ÅŠüÿÿÿÿ8“ßƒå¥1
+¤
+java:S1192j"†Define a constant instead of duplicating this literal "---------------------------------------------------------------------" 4 times.(ïƒ²¿8”ßƒå¥1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á–øÁúÿÿÿÿ8•ßƒå¥1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘şÿÿÿÿ8•ßƒå¥1
+n	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğÛ¯™8•ßƒå¥1
+s	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«†¥Éşÿÿÿÿ8•ßƒå¥1
+s	java:S117“"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ÆÎÌüÿÿÿÿ8•ßƒå¥1
+s	java:S117—"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ÆÎÌüÿÿÿÿ8•ßƒå¥1
+s	java:S117›"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ÆÎÌüÿÿÿÿ8•ßƒå¥1
+s	java:S117Ÿ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ÆÎÌüÿÿÿÿ8•ßƒå¥1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(«ƒÙÎ8˜ßƒå¥1
+i
+java:S2095."GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8íâƒå¥1
+W
+java:S1118":Add a private constructor to hide the implicit public one.(¯´êç8òâƒå¥1
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.(á–øÁúÿÿÿÿ8üâƒå¥1
+Z	java:S106U"9Replace this use of System.out or System.err by a logger.(”Ìıÿÿÿÿ8Šãƒå¥1
+Z	java:S106X"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8ãƒå¥1
+Z	java:S106]"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8ãƒå¥1
+Z	java:S106_"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8’ãƒå¥1
+E
+java:S1659Œ""Declare "outc" on a separate line.(¬¾›üùÿÿÿÿ8”ãƒå¥1
+k
+java:S1871"MThis branch's code block is the same as the block for the branch on line 146.(å¥‡8Ÿãƒå¥1
+k
+java:S1871š"MThis branch's code block is the same as the block for the branch on line 150.(üˆà‡8 ãƒå¥1
+é
+java:S6541"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 121 to 64, Complexity from 19 to 14, Nesting Level from 4 to 2, Number of Variables from 39 to 6.(á–øÁúÿÿÿÿ8¦ãƒå¥1

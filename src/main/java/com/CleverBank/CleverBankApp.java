@@ -12,6 +12,7 @@ import static PDFWorking.AccountStatementGenerator.generateAccountStatement;
 import static PDFWorking.CheckGenerator.*;
 import static DataOperations.CRUD.*;
 import static DataOperations.ScoreOperations.*;
+import static PDFWorking.ExpensesForAllTime.generateMoneyStatement;
 import static java.sql.DriverManager.getConnection;
 
 /**
@@ -44,7 +45,7 @@ public class CleverBankApp {
 
         System.out.println("PostgreSQL JDBC Driver successfully connected");
 
-        //Имя пользователя PostgreSQL
+        //мя пользователя PostgreSQL
         System.out.println("Enter PostgreSQL Username:");
         final String USER = in.nextLine();
 
@@ -112,7 +113,7 @@ public class CleverBankApp {
 
                     case 3:
                         //Получение выписок по счетам пользователей
-                        System.out.println("Enter the id of the user whose statement you want to receive:");
+                        System.out.println("Enter the id of the user whose account statement you want to receive:");
                         try {
                             String id = in.next();
                             int user_id = Integer.parseInt(id);
@@ -142,7 +143,21 @@ public class CleverBankApp {
                             System.out.println(e.getMessage());
                         }
                         break;
+                    //Получение выписки по доходам и расходам
                     case 4:
+                        System.out.println("Enter the id of the user whose money statement you want to receive:");
+                        try {
+                            String id = in.next();
+                            int user_id = Integer.parseInt(id);
+
+                            LocalDateTime startPeriod, endPeriod = LocalDateTime.now();
+                            startPeriod = endPeriod.minusYears(20);
+                            generateMoneyStatement(connection, user_id, startPeriod, endPeriod);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 5:
                         break loop;
                     default:
                         System.out.println("Invalid point");
@@ -254,7 +269,7 @@ public class CleverBankApp {
                     }
                     break;
 
-                //Изменение записи в таблице
+                //зменение записи в таблице
                 case 5:
                     try {
                         printTableList();
@@ -461,7 +476,8 @@ public class CleverBankApp {
         System.out.println("1. Score operations");
         System.out.println("2. Tables operations");
         System.out.println("3. Account statement");
-        System.out.println("4. Exit");
+        System.out.println("4. Money statement");
+        System.out.println("5. Exit");
         System.out.println();
     }
 

@@ -11,21 +11,22 @@ import java.util.ArrayList;
 import static PDFWorking.PDFGenerator.generatePDF;
 
 /**
- * Класс для создание выписок со счёта.
+ * Класс, релизующий метод для рассчёта расходов и доходов со счетов пользователя за всё время
  *
  * @author Богдан Рыбаков
  * @version 1.0
  */
-public class AccountStatementGenerator {
+public class ExpensesForAllTime {
+
     /**
-     * Функция для создания текста выписки. Внутри себя обращается к методу, создающему PDF документ {@link PDFGenerator#generatePDF(ArrayList, String, String)}
+     * Метод, реализующий создание выписки по расходам и доходам со счетов пользователя. Использует {@link PDFGenerator#generatePDF(ArrayList, String, String)}
      *
      * @param connection    - соединение с базой данных
-     * @param user_id       - идентификатор пользователя, для чьих счетов нужно делать выписки
-     * @param startOfPeriod - начало периода, по которому проводится выписка
-     * @param endOfPeriod   - конец периода, по которому проводится выписка
+     * @param user_id       - идентификатор пользователя
+     * @param startOfPeriod - начало периода расчётов
+     * @param endOfPeriod   - конеч периода расчётов
      */
-    public static void generateAccountStatement(Connection connection, int user_id, LocalDateTime startOfPeriod, LocalDateTime endOfPeriod) {
+    public static void generateMoneyStatement(Connection connection, int user_id, LocalDateTime startOfPeriod, LocalDateTime endOfPeriod) {
 
         StringBuilder FIO = new StringBuilder();
         ArrayList<ArrayList<String>> scoreNumbers = new ArrayList<>();
@@ -99,6 +100,8 @@ public class AccountStatementGenerator {
 
         //Создание текста выписки
         for (ArrayList<String> scoreNumber : scoreNumbers) {
+
+
             ArrayList<String> text = new ArrayList<String>();
             text.add("---------------------------------------------------------------------");
             text.add("|                           Account Statement                       |");
@@ -133,24 +136,48 @@ public class AccountStatementGenerator {
                 date.insert(0, ' ');
 
             text.add("| Date of statement creation: " + date + " |");
-            text.add("---------------------------------------------------------------------");
-            text.add("|        Date         |          Note           |       Amount      ");
-            text.add("---------------------------------------------------------------------");
+
+            float inc = 0, outc = 0;
+
+            DecimalFormat decimalFormat_2 = new DecimalFormat("#.##");
+            float b_2;
             for (ArrayList<String> tr : transactions) {
                 if (tr.get(0).equals(scoreNumber.get(0)) || tr.get(1).equals(scoreNumber.get(0))) {
                     if (tr.get(0).equals("DEPOSIT")) {
-                        text.add("| " + tr.get(3) + " |         DEPOSIT         |  " + tr.get(2));
+                        String bal_2 = tr.get(2).replace("$", "").replace(",", "");
+                        b_2 = Float.parseFloat(bal_2);
+                        inc += b_2;
                     } else if (tr.get(1).equals("DEBITING")) {
-                        text.add("| " + tr.get(3) + " |        DEBITING         | -" + tr.get(2));
+                        String bal_2 = tr.get(2).replace("$", "").replace(",", "");
+                        b_2 = Float.parseFloat(bal_2);
+                        outc += b_2;
+                    } else if (tr.get(0).equals(scoreNumber.get(0))) {
+                        String bal_2 = tr.get(2).replace("$", "").replace(",", "");
+                        b_2 = Float.parseFloat(bal_2);
+                        outc += b_2;
                     } else {
-                        text.add("| " + tr.get(3) + " | Receipt from " + tr.get(1) + " |  " + tr.get(2));
+                        String bal_2 = tr.get(2).replace("$", "").replace(",", "");
+                        b_2 = Float.parseFloat(bal_2);
+                        inc += b_2;
                     }
                 }
             }
+            StringBuilder income = new StringBuilder(decimalFormat_2.format(inc));
+            StringBuilder outcome = new StringBuilder(decimalFormat_2.format(outc));
+            outcome.insert(0, '-');
+            while (income.length() < 31)
+                income.insert(0, ' ');
+            while (outcome.length() < 32)
+                outcome.insert(0, ' ');
+
+            text.add("---------------------------------------------------------------------");
+            text.add("|             Income             |              Outcome             |");
+            text.add("---------------------------------------------------------------------");
+            text.add("|" + income + " | " + outcome + " |");
             text.add("---------------------------------------------------------------------");
 
             //Вызов метода для создания докуметов
-            generatePDF(text, "account_statements", fileName.toString() + scoreNumber.get(0) + +localDateTime.getDayOfMonth() + "-" + localDateTime.getMonthValue() +
+            generatePDF(text, "money_statements", fileName.toString() + scoreNumber.get(0) + +localDateTime.getDayOfMonth() + "-" + localDateTime.getMonthValue() +
                     "-" + localDateTime.getYear() + "-" + localDateTime.getHour() + "-" + localDateTime.getMinute() + "-"
                     + localDateTime.getSecond());
         }

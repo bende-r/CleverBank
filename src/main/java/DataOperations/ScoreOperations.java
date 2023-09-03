@@ -10,32 +10,37 @@ import static DataOperations.CRUD.getColNames;
 import static DataOperations.CRUD.insertRow;
 
 public class ScoreOperations {
-    public static void addingFunds(Connection connection, String scoreNumber, float deposit) throws SQLException {
+    public static boolean addingFunds(Connection connection, String scoreNumber, double deposit) throws SQLException {
+        boolean result = false;
         Statement statement = null;
         try {
             statement = connection.createStatement();
 
             statement.executeUpdate("BEGIN; " +
                     "UPDATE postgres.cleverbank.scores SET balance = balance + (" + deposit + ")::money " +
-                    "WHERE score_number = " + scoreNumber + "::text; " +
+                    "WHERE score_number = '" + scoreNumber + "'::text; " +
                     "COMMIT;");
 
+            result = true;
         } catch (SQLException e) {
             System.out.println("The account replenishment operation failed");
             statement.execute("ROLLBACK;");
             statement.close();
         } finally {
             statement.close();
+            return result;
         }
     }
 
-    public static void trasfer(Connection connection, String inputScore, String outputScore, float deposit) throws SQLException {
+    public static boolean trasfer(Connection connection, String inputScore, String outputScore, double deposit) throws SQLException {
+        boolean result = false;
+
         Statement statement = null;
         ArrayList<String> data = new ArrayList<String>();
         ArrayList<String> colNames = getColNames(connection, "transactions");
         colNames.remove(0);
         LocalDateTime localDateTime = LocalDateTime.now();
-        data.add(Float.toString(deposit));
+        data.add(Double.toString(deposit));
         data.add("" + localDateTime.getYear() + "-" + "" + localDateTime.getMonth() +
                 "-" + localDateTime.getDayOfMonth() + " " + localDateTime.getHour() +
                 ":" + localDateTime.getSecond());
@@ -58,11 +63,15 @@ public class ScoreOperations {
                 System.out.println("Amount being debited exceeds the score balance");
             }
 
+            result = true;
             System.out.println("Transfer was complite");
+
+
         } catch (SQLException e) {
             statement.executeUpdate("ROLLBACK;");
         } finally {
             statement.close();
+            return result;
         }
     }
 

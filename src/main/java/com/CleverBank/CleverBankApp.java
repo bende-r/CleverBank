@@ -1,16 +1,16 @@
 package com.CleverBank;
 
-import JDBC.SQLFileReader;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static PDFWorking.AccountStatementGenerator.generateAccountStatement;
+import static PDFWorking.CheckGenerator.*;
 import static DataOperations.CRUD.*;
 import static DataOperations.ScoreOperations.*;
-import static ChecksGenerator.CheckGenerstor.generateTransactionCheck;
 import static java.sql.DriverManager.getConnection;
+
 
 public class CleverBankApp {
     static final String DB_URL = "jdbc:postgresql://localhost:5432/";
@@ -19,10 +19,6 @@ public class CleverBankApp {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] argv) {
-        SQLFileReader sqlFileReader = new SQLFileReader();
-
-        System.out.println("Testing connection to PostgreSQL JDBC");
-
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -71,11 +67,18 @@ public class CleverBankApp {
             }
 
 */
-
+            int point;
             loop:
             while (true) {
                 printMenu();
-                int point = in.nextInt();
+
+                try {
+                    String p = in.next();
+                    point = Integer.parseInt(p);
+                } catch (Exception e) {
+                    e.getMessage();
+                    point = 0;
+                }
 
                 switch (point) {
                     case 1:
@@ -84,7 +87,41 @@ public class CleverBankApp {
                     case 2:
                         tableMenu(connection);
                         break;
+
                     case 3:
+                        System.out.println("Enter the id of the user whose statement you want to receive:");
+                        try {
+                            String id = in.next();
+                            int user_id = Integer.parseInt(id);
+
+
+                            System.out.println("Select the period for which you want to receive a statement");
+                            System.out.println("1. Last month");
+                            System.out.println("2. Last year");
+                            System.out.println("3. All time");
+
+                            String per = in.next();
+                            int period = Integer.parseInt(per);
+                            LocalDateTime startPeriod, endPeriod = LocalDateTime.now();
+
+                            switch (period) {
+                                case 1:
+                                    startPeriod = endPeriod.minusMonths(1);
+                                    break;
+                                case 2:
+                                    startPeriod = endPeriod.minusYears(1);
+                                    break;
+                                default:
+                                    startPeriod = LocalDateTime.MIN;
+                            }
+
+
+                            generateAccountStatement(connection, user_id, startPeriod, endPeriod);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 4:
 
                         break loop;
                     default:
@@ -109,9 +146,10 @@ public class CleverBankApp {
         while (true) {
             printTableMenu();
             try {
-                point = in.nextInt();
+                String p = in.next();
+                point = Integer.parseInt(p);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.getMessage();
                 point = 0;
             }
 
@@ -215,7 +253,7 @@ public class CleverBankApp {
 
     public static void scoreMenu(Connection connection) {
         int point;
-        float deposit;
+        double deposit;
         String scoreNumber, outputScore;
         LocalDateTime localDateTime;
 
@@ -223,9 +261,10 @@ public class CleverBankApp {
         while (true) {
             printScoreOperationsMenu();
             try {
-                point = in.nextInt();
+                String p = in.next();
+                point = Integer.parseInt(p);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.getMessage();
                 point = 0;
             }
 
@@ -236,27 +275,38 @@ public class CleverBankApp {
                         scoreNumber = in.next();
 
                         System.out.print("Enter deposit amount:");
-                        String d = in.next();
 
-                        deposit = Float.parseFloat(d);
-                        if (deposit <= 0) break;
+                        try {
+                            String d = in.next();
+                            deposit = Double.parseDouble(d);
+                        } catch (Exception e) {
+                            e.getMessage();
+                            break;
+                        }
 
-                        addingFunds(connection, scoreNumber, deposit);
+                        if (deposit <= 0) {
+                            System.out.println("Invalid deposit value");
+                            break;
+                        }
 
-                        ArrayList<String> data = new ArrayList<String>();
-                        ArrayList<String> colNames = getColNames(connection, "transactions");
-                        colNames.remove(0);
+                        boolean res = addingFunds(connection, scoreNumber, deposit);
+                        if (res) {
+                            ArrayList<String> data = new ArrayList<String>();
+                            ArrayList<String> colNames = getColNames(connection, "transactions");
+                            colNames.remove(0);
 
-                        localDateTime = LocalDateTime.now();
+                            localDateTime = LocalDateTime.now();
 
-                        data.add(Float.toString(deposit));
-                        data.add("" + localDateTime.getYear() + "-" + "" + localDateTime.getMonth() +
-                                "-" + localDateTime.getDayOfMonth() + " " + localDateTime.getHour() +
-                                ":" + localDateTime.getSecond());
-                        data.add("DEPOSIT");
-                        data.add(scoreNumber);
+                            data.add(Double.toString(deposit));
+                            data.add("" + localDateTime.getYear() + "-" + "" + localDateTime.getMonth() +
+                                    "-" + localDateTime.getDayOfMonth() + " " + localDateTime.getHour() +
+                                    ":" + localDateTime.getSecond());
+                            data.add("DEPOSIT");
+                            data.add(scoreNumber);
 
-                        insertRow(connection, data, "transactions", colNames);
+                            insertRow(connection, data, "transactions", colNames);
+                            generateDepositCheck(connection, scoreNumber, deposit);
+                        }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -267,9 +317,13 @@ public class CleverBankApp {
                         scoreNumber = in.next();
 
                         System.out.print("Enter debit amount:");
-                        String d = in.next();
-
-                        deposit = Float.parseFloat(d);
+                        try {
+                            String d = in.next();
+                            deposit = Double.parseDouble(d);
+                        } catch (Exception e) {
+                            e.getMessage();
+                            break;
+                        }
 
                         if (deposit <= 0) {
                             System.out.println("Invalid deposit value");
@@ -287,7 +341,7 @@ public class CleverBankApp {
 
                             localDateTime = LocalDateTime.now();
 
-                            data.add(Float.toString(deposit));
+                            data.add(Double.toString(deposit));
                             data.add("" + localDateTime.getYear() + "-" + "" + localDateTime.getMonth() +
                                     "-" + localDateTime.getDayOfMonth() + " " + localDateTime.getHour() +
                                     ":" + localDateTime.getSecond());
@@ -295,6 +349,7 @@ public class CleverBankApp {
                             data.add("DEBITING");
 
                             insertRow(connection, data, "transactions", colNames);
+                            generateDebitingCheck(connection, scoreNumber, deposit);
                         }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -306,15 +361,23 @@ public class CleverBankApp {
                         System.out.print("Enter input score number:");
                         scoreNumber = in.next();
 
-                        System.out.print("Enter output score number");
+                        System.out.print("Enter output score number:");
                         outputScore = in.next();
 
                         System.out.print("Enter deposit amount:");
-                        String d = in.next();
+                        try {
+                            String d = in.next();
+                            deposit = Double.parseDouble(d);
+                        } catch (Exception e) {
+                            e.getMessage();
+                            break;
+                        }
 
-                        deposit = Float.parseFloat(d);
-                        trasfer(connection, scoreNumber, outputScore, deposit);
-                        generateTransactionCheck(connection, scoreNumber, outputScore, deposit);
+                        if (deposit <= 0) break;
+
+                        boolean res = trasfer(connection, scoreNumber, outputScore, deposit);
+                        if (res)
+                            generateTransactionCheck(connection, scoreNumber, outputScore, deposit);
 
                     } catch (SQLException e) {
                         System.out.println("Transfer operation failed");
@@ -344,7 +407,9 @@ public class CleverBankApp {
         System.out.println("\n---------Menu---------");
         System.out.println("1. Score operations");
         System.out.println("2. Tables operations");
-        System.out.println("3. Exit\n");
+        System.out.println("3. Account statement");
+        System.out.println("4. Exit");
+        System.out.println();
     }
 
     public static void printTableList() {

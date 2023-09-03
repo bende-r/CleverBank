@@ -220,14 +220,14 @@ public class CleverBankApp {
                         printTableList();
                         System.out.print("Enter the name of the table you want to add the entry to:");
                         tableName = in.next();
-                        ArrayList<String> colNames = getColNames(connection, tableName);
+                        ArrayList<String> colNames = getColNames(connection, tableName.toLowerCase());
                         ArrayList<String> inputValues = new ArrayList<String>();
                         colNames.remove(0);
                         for (int i = 0; i < colNames.size(); i++) {
                             System.out.print("Enter a value for the field " + colNames.get(i) + ":");
                             inputValues.add(in.next());
                         }
-                        insertRow(connection, inputValues, tableName, colNames);
+                        insertRow(connection, inputValues, tableName.toLowerCase(), colNames);
 
                     } catch (SQLException e) {
                         System.out.println("Failed to add row to table");
@@ -246,7 +246,7 @@ public class CleverBankApp {
                         System.out.print("Enter the ID of the record you want to delete:");
                         id = in.nextInt();
 
-                        deleteRow(connection, tableName, id);
+                        deleteRow(connection, tableName.toLowerCase(), id);
                     } catch (SQLException e) {
                         System.out.println("Failed to delete row from table");
                     } catch (Exception e) {
@@ -260,7 +260,7 @@ public class CleverBankApp {
                         printTableList();
                         System.out.print("Enter the name of the table you want to change the row for:");
                         tableName = in.next();
-                        ArrayList<String> colNames = getColNames(connection, tableName);
+                        ArrayList<String> colNames = getColNames(connection, tableName.toLowerCase());
                         ArrayList<String> inputValues = new ArrayList<String>();
                         System.out.print("Enter the ID of the row you want to change:");
                         String id = in.next();
@@ -270,7 +270,7 @@ public class CleverBankApp {
                             System.out.print("Enter a value for the field " + colNames.get(i) + ":");
                             inputValues.add(in.next());
                         }
-                        updateRow(connection, inputValues, tableName, colNames);
+                        updateRow(connection, inputValues, tableName.toLowerCase(), colNames);
 
                     } catch (SQLException e) {
                         System.out.println("Failed to add row to table");

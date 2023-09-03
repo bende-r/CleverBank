@@ -1,0 +1,131 @@
+
+w
+java:S2293à"YReplace the type specification in this constructor call with the diamond operator ("<>").(û·É8ƒâ¹à¥1
+w
+java:S2293ˆ"YReplace the type specification in this constructor call with the diamond operator ("<>").(û·É8„â¹à¥1
+w
+java:S2293Ğ"YReplace the type specification in this constructor call with the diamond operator ("<>").(³ìËù8„â¹à¥1
+w
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(³ìËù8„â¹à¥1
+q
+java:S1192”"NDefine a constant instead of duplicating this literal "Invalid point" 3 times.(µİ˜¯øÿÿÿÿ8„â¹à¥1
+k
+java:S1192Ñ"MDefine a constant instead of duplicating this literal "transactions" 4 times.(—±Î8„â¹à¥1
+W
+java:S1141A"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8…â¹à¥1
+W
+java:S1141N"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8…â¹à¥1
+W
+java:S1141_"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8…â¹à¥1
+W
+java:S1141t"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8…â¹à¥1
+X
+java:S1141Â"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8…â¹à¥1
+X
+java:S1141í"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8…â¹à¥1
+X
+java:S1141 "5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8…â¹à¥1
+r	java:S117v"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ßÖúÿÿÿÿ8…â¹à¥1
+u	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(€¿ª"8‡â¹à¥1
+o
+java:S3776""RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(…ú®š8äæ¹à¥1
+O
+java:S4925&"-Remove this "Class.forName()", it is useless.(õ†¨Äùÿÿÿÿ8åæ¹à¥1
+Z	java:S106("9Replace this use of System.out or System.err by a logger.(úı§Èûÿÿÿÿ8ææ¹à¥1
+U	java:S106-"9Replace this use of System.out or System.err by a logger.(üÌÒË8ææ¹à¥1
+Z	java:S1060"9Replace this use of System.out or System.err by a logger.(¶¬Í“ıÿÿÿÿ8ææ¹à¥1
+U	java:S1064"9Replace this use of System.out or System.err by a logger.(ç£Ã¥8ææ¹à¥1
+c
+java:S2147›"ECombine this catch with the one at line 153, which has the same body.(”ı¾8çæ¹à¥1
+U	java:S106;"9Replace this use of System.out or System.err by a logger.(ÍÛÕ½8çæ¹à¥1
+Z	java:S106="9Replace this use of System.out or System.err by a logger.(—‚ı„øÿÿÿÿ8çæ¹à¥1
+…
+java:S1157B"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(ê«÷¬úÿÿÿÿ8èæ¹à¥1
+Z	java:S106G"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ñæ¹à¥1
+Z	java:S106J"9Replace this use of System.out or System.err by a logger.(™“¹›ÿÿÿÿÿ8òæ¹à¥1
+…
+java:S1157O"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(ê«÷¬úÿÿÿÿ8òæ¹à¥1
+Z	java:S106T"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8óæ¹à¥1
+]
+java:S1119Z";Refactor the code to remove this label and the need for it.(åÍœûÿÿÿÿ8óæ¹à¥1
+Z	java:S106s"9Replace this use of System.out or System.err by a logger.(¤¯·ùùÿÿÿÿ8õæ¹à¥1
+I
+java:S1659"'Declare "endPeriod" on a separate line.(Î‹Í¾ıÿÿÿÿ8öæ¹à¥1
+Z	java:S106x"9Replace this use of System.out or System.err by a logger.(¡ƒœóüÿÿÿÿ8öæ¹à¥1
+U	java:S106y"9Replace this use of System.out or System.err by a logger.(¯…ÕÄ8öæ¹à¥1
+U	java:S106z"9Replace this use of System.out or System.err by a logger.(¬ùÁÓ8öæ¹à¥1
+Z	java:S106{"9Replace this use of System.out or System.err by a logger.(¢¡ƒĞşÿÿÿÿ8÷æ¹à¥1
+[	java:S106"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8øæ¹à¥1
+[	java:S106”"9Replace this use of System.out or System.err by a logger.(µİ˜¯øÿÿÿÿ8øæ¹à¥1
+u
+java:S3776¦"RRefactor this method to reduce its Cognitive Complexity from 42 to the 15 allowed.(Çƒ’¶øÿÿÿÿ8ùæ¹à¥1
+`
+java:S1659¨"BDeclare "field" and all following declarations on a separate line.(úîÜ¾8ûæ¹à¥1
+^
+java:S1119ª";Refactor the code to remove this label and the need for it.(åÍœûÿÿÿÿ8üæ¹à¥1
+V	java:S106½"9Replace this use of System.out or System.err by a logger.(åø¬‹8ıæ¹à¥1
+[	java:S106Á"9Replace this use of System.out or System.err by a logger.(ŸÉéÜşÿÿÿÿ8şæ¹à¥1
+[	java:S106Ã"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8şæ¹à¥1
+[	java:S106Ë"9Replace this use of System.out or System.err by a logger.(×œ©¥şÿÿÿÿ8ÿæ¹à¥1
+[	java:S106Í"9Replace this use of System.out or System.err by a logger.(šá„Øúÿÿÿÿ8ÿæ¹à¥1
+V	java:S106Ï"9Replace this use of System.out or System.err by a logger.(ú–ÈĞ8ÿæ¹à¥1
+[	java:S106Ó"9Replace this use of System.out or System.err by a logger.(ŸÉéÜşÿÿÿÿ8ÿæ¹à¥1
+[	java:S106Õ"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8€ç¹à¥1
+[	java:S106İ"9Replace this use of System.out or System.err by a logger.(ƒûĞˆøÿÿÿÿ8€ç¹à¥1
+V	java:S106ã"9Replace this use of System.out or System.err by a logger.(½Íº8„ç¹à¥1
+[	java:S106é"9Replace this use of System.out or System.err by a logger.(ÿ€Ë°şÿÿÿÿ8…ç¹à¥1
+[	java:S106ë"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8…ç¹à¥1
+V	java:S106ô"9Replace this use of System.out or System.err by a logger.(±İÚË8†ç¹à¥1
+[	java:S106ö"9Replace this use of System.out or System.err by a logger.(Ã¯¡¬ÿÿÿÿÿ8†ç¹à¥1
+[	java:S106û"9Replace this use of System.out or System.err by a logger.(İ×„şÿÿÿÿ8†ç¹à¥1
+[	java:S106ı"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8†ç¹à¥1
+V	java:S106…"9Replace this use of System.out or System.err by a logger.(ÿéüš8‡ç¹à¥1
+U	java:S106‰"9Replace this use of System.out or System.err by a logger.(Ê—r8‡ç¹à¥1
+V	java:S106"9Replace this use of System.out or System.err by a logger.(½Íº8ˆç¹à¥1
+[	java:S106”"9Replace this use of System.out or System.err by a logger.(ÿ€Ë°şÿÿÿÿ8ˆç¹à¥1
+[	java:S106–"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8‰ç¹à¥1
+[	java:S106"9Replace this use of System.out or System.err by a logger.(µİ˜¯øÿÿÿÿ8‰ç¹à¥1
+p
+java:S3776§"RRefactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.(ş°ï–8Šç¹à¥1
+L
+java:S1659ª")Declare "outputScore" on a separate line.(ùİ‚úÿÿÿÿ8ç¹à¥1
+^
+java:S1119­";Refactor the code to remove this label and the need for it.(åÍœûÿÿÿÿ8ç¹à¥1
+V	java:S106¿"9Replace this use of System.out or System.err by a logger.(…µó8ç¹à¥1
+V	java:S106Á"9Replace this use of System.out or System.err by a logger.(·ø‹8ç¹à¥1
+V	java:S106Ê"9Replace this use of System.out or System.err by a logger.(Ç²ùß8ç¹à¥1
+[	java:S106ã"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8‘ç¹à¥1
+V	java:S106é"9Replace this use of System.out or System.err by a logger.(…µó8’ç¹à¥1
+[	java:S106ì"9Replace this use of System.out or System.err by a logger.(ÆÕòüÿÿÿÿ8“ç¹à¥1
+V	java:S106ö"9Replace this use of System.out or System.err by a logger.(Ç²ùß8“ç¹à¥1
+V	java:S106û"9Replace this use of System.out or System.err by a logger.(Ş´›Ï8”ç¹à¥1
+[	java:S106“"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8–ç¹à¥1
+V	java:S106™"9Replace this use of System.out or System.err by a logger.(Äæ…Ì8—ç¹à¥1
+U	java:S106œ"9Replace this use of System.out or System.err by a logger.(ƒ£Š88—ç¹à¥1
+V	java:S106Ÿ"9Replace this use of System.out or System.err by a logger.(·ø‹8—ç¹à¥1
+V	java:S106®"9Replace this use of System.out or System.err by a logger.(ë–¼ı8˜ç¹à¥1
+[	java:S106°"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8˜ç¹à¥1
+[	java:S106¸"9Replace this use of System.out or System.err by a logger.(µİ˜¯øÿÿÿÿ8˜ç¹à¥1
+V	java:S106Á"9Replace this use of System.out or System.err by a logger.(Àãş¢8™ç¹à¥1
+[	java:S106Â"9Replace this use of System.out or System.err by a logger.(ÂµôÚÿÿÿÿÿ8™ç¹à¥1
+V	java:S106Ã"9Replace this use of System.out or System.err by a logger.(Ï©Å8™ç¹à¥1
+V	java:S106Ä"9Replace this use of System.out or System.err by a logger.(ö¥Ôò8™ç¹à¥1
+[	java:S106Å"9Replace this use of System.out or System.err by a logger.(¬¤›íşÿÿÿÿ8™ç¹à¥1
+[	java:S106Ì"9Replace this use of System.out or System.err by a logger.(¯±³Äÿÿÿÿÿ8šç¹à¥1
+V	java:S106Í"9Replace this use of System.out or System.err by a logger.(‘Ã™8šç¹à¥1
+[	java:S106Î"9Replace this use of System.out or System.err by a logger.(È­–¥øÿÿÿÿ8šç¹à¥1
+V	java:S106Ï"9Replace this use of System.out or System.err by a logger.(Œı‡ò8šç¹à¥1
+V	java:S106Ğ"9Replace this use of System.out or System.err by a logger.(™¬Ç•8šç¹à¥1
+[	java:S106Ñ"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8šç¹à¥1
+[	java:S106Ø"9Replace this use of System.out or System.err by a logger.(ş÷Îšøÿÿÿÿ8›ç¹à¥1
+[	java:S106Ù"9Replace this use of System.out or System.err by a logger.(¹ÛïÆşÿÿÿÿ8›ç¹à¥1
+U	java:S106Ú"9Replace this use of System.out or System.err by a logger.(­°¢B8›ç¹à¥1
+[	java:S106Û"9Replace this use of System.out or System.err by a logger.(â‘ßøùÿÿÿÿ8›ç¹à¥1
+[	java:S106Ü"9Replace this use of System.out or System.err by a logger.(Ğğ²·ûÿÿÿÿ8›ç¹à¥1
+[	java:S106ã"9Replace this use of System.out or System.err by a logger.(œ…Àúøÿÿÿÿ8œç¹à¥1
+V	java:S106ä"9Replace this use of System.out or System.err by a logger.(ğæÓÕ8œç¹à¥1
+V	java:S106å"9Replace this use of System.out or System.err by a logger.(ïˆı¬8œç¹à¥1
+[	java:S106æ"9Replace this use of System.out or System.err by a logger.(½ªÌ÷øÿÿÿÿ8œç¹à¥1
+V	java:S106ç"9Replace this use of System.out or System.err by a logger.(‡áÌŸ8œç¹à¥1
+V	java:S106è"9Replace this use of System.out or System.err by a logger.(ëÈü8œç¹à¥1
+[	java:S106é"9Replace this use of System.out or System.err by a logger.(Ë„•›şÿÿÿÿ8Ÿç¹à¥1

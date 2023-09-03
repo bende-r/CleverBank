@@ -1,0 +1,39 @@
+
+{
+java:S2293R"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘£ÅŠüÿÿÿÿ8œ› ×¥1
+|
+java:S2293–"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘£ÅŠüÿÿÿÿ8œ› ×¥1
+|
+java:S2293Ù"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘£ÅŠüÿÿÿÿ8› ×¥1
+k
+java:S1192U"IDefine a constant instead of duplicating this literal "| Check:" 3 times.(¢®ŠÌúÿÿÿÿ8› ×¥1
+ü
+java:S11922"ŞDefine a constant instead of duplicating this literal " SELECT cleverbank.banks.bank_name FROM cleverbank.banks, cleverbank.scores WHERE cleverbank.scores.bank_id = banks.id AND cleverbank.scores.score_number = '" 4 times.(“¶Ãí8› ×¥1
+|
+java:S1192W"_Define a constant instead of duplicating this literal "                              " 3 times.(êÑ¾—8› ×¥1
+i
+java:S1192^"GDefine a constant instead of duplicating this literal "| Sum:" 3 times.(ÿ›üïÿÿÿÿÿ8› ×¥1
+
+java:S1192S"sDefine a constant instead of duplicating this literal "--------------------------------------------------" 6 times.(¤‡ë†8› ×¥1
+d
+java:S1192b"GDefine a constant instead of duplicating this literal "checks" 3 times.( ÁªË8› ×¥1
+
+java:S1192T"sDefine a constant instead of duplicating this literal "|                     Bank check                 |" 3 times.(º¤şº8› ×¥1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(«ƒÙÎ8 › ×¥1
+e
+java:S2259E"HA "NullPointerException" could be thrown; "senderBank" is nullable here.(½„ãò8—¡×¥1
+h
+java:S2259Œ"KA "NullPointerException" could be thrown; "recipientBank" is nullable here.(ŞØ©D8—¡×¥1
+h
+java:S2259Ï"KA "NullPointerException" could be thrown; "recipientBank" is nullable here.(ŞØ©D8—¡×¥1
+j
+java:S2095„"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8—¡×¥1
+i
+java:S20957"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8—¡×¥1
+j
+java:S2095Æ"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8—¡×¥1
+W
+java:S1118":Add a private constructor to hide the implicit public one.(†ôï8Ä ×¥1
+Z	java:S106B"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8”—¡×¥1
+[	java:S106‰"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8——¡×¥1
+[	java:S106Ì"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8š—¡×¥1

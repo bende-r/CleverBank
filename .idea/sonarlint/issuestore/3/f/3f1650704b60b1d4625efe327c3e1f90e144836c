@@ -1,0 +1,22 @@
+
+{
+java:S2293g"YReplace the type specification in this constructor call with the diamond operator ("<>").(‘£ÅŠüÿÿÿÿ8ùè·Ö¥1
+¤
+java:S1192h"†Define a constant instead of duplicating this literal "---------------------------------------------------------------------" 4 times.(ïƒ²¿8ùè·Ö¥1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹Æéÿÿÿÿÿ8ùè·Ö¥1
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸Í¿ıÿÿÿÿ8ùè·Ö¥1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(«ƒÙÎ8ûè·Ö¥1
+i
+java:S2095-"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8¯ë·Ö¥1
+\
+java:S1118":Add a private constructor to hide the implicit public one.(‘¶†‚ıÿÿÿÿ8±ë·Ö¥1
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(¹Æéÿÿÿÿÿ8±ë·Ö¥1
+C
+java:S1659"!Declare "FIO" on a separate line.(¸Í¿ıÿÿÿÿ8³ë·Ö¥1
+Z	java:S106R"9Replace this use of System.out or System.err by a logger.(”Ìıÿÿÿÿ8¶ë·Ö¥1
+Z	java:S106U"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8¶ë·Ö¥1
+Z	java:S106Z"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8¶ë·Ö¥1
+Z	java:S106\"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8¶ë·Ö¥1
+é
+java:S6541"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 101 to 64, Complexity from 17 to 14, Nesting Level from 4 to 2, Number of Variables from 30 to 6.(¹Æéÿÿÿÿÿ8»ë·Ö¥1

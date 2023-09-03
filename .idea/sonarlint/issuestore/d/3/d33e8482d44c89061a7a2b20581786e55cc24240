@@ -1,0 +1,91 @@
+
+w
+java:S2293õ"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ô¡ Ò8ğ‚Ü¤1
+e
+java:S1192W"HDefine a constant instead of duplicating this literal " WHERE " 3 times.(‹—ïØ8ñ‚Ü¤1
+l
+java:S11926"JDefine a constant instead of duplicating this literal "; COMMIT;" 3 times.(¥ËöÚüÿÿÿÿ8ñ‚Ü¤1
+
+java:S1319"dThe type of "data" should be an interface such as "List" rather than the implementation "ArrayList".(ı‰ŒÜ8ò‚Ü¤1
+…
+java:S1319"hThe type of "colNames" should be an interface such as "List" rather than the implementation "ArrayList".(ı‰ŒÜ8ò‚Ü¤1
+†
+java:S1319M"dThe type of "data" should be an interface such as "List" rather than the implementation "ArrayList".(¶ıÜ©ùÿÿÿÿ8ò‚Ü¤1
+Š
+java:S1319M"hThe type of "colNames" should be an interface such as "List" rather than the implementation "ArrayList".(¶ıÜ©ùÿÿÿÿ8ò‚Ü¤1
+“
+java:S1319ì"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(àøÅ¯ùÿÿÿÿ8ò‚Ü¤1
+>
+java:S1643 "Use a StringBuilder instead.(ü€ÊØÿÿÿÿÿ8ò‚Ü¤1
+>
+java:S1643""Use a StringBuilder instead.(›îìİùÿÿÿÿ8ò‚Ü¤1
+>
+java:S1643*"Use a StringBuilder instead.(ú«×Şüÿÿÿÿ8ò‚Ü¤1
+8
+java:S1643,"Use a StringBuilder instead.(¥ü8ò‚Ü¤1
+9
+java:S16430"Use a StringBuilder instead.(ÛïÆ”8ò‚Ü¤1
+>
+java:S16432"Use a StringBuilder instead.(­·©‘şÿÿÿÿ8ò‚Ü¤1
+9
+java:S1643V"Use a StringBuilder instead.(ÑÄëù8ò‚Ü¤1
+9
+java:S1643W"Use a StringBuilder instead.(‹—ïØ8ò‚Ü¤1
+>
+java:S1643Y"Use a StringBuilder instead.(¥ËöÚüÿÿÿÿ8ò‚Ü¤1
+>
+java:S1643]"Use a StringBuilder instead.(©«ßŞüÿÿÿÿ8ò‚Ü¤1
+9
+java:S1643a"Use a StringBuilder instead.(’†Û‘8ò‚Ü¤1
+9
+java:S1643b"Use a StringBuilder instead.(‹—ïØ8ò‚Ü¤1
+>
+java:S1643d"Use a StringBuilder instead.(¥ËöÚüÿÿÿÿ8ò‚Ü¤1
+>
+java:S1643h"Use a StringBuilder instead.(‰úÁÃüÿÿÿÿ8ò‚Ü¤1
+^
+java:S4973'"<Strings and Boxed types should be compared using "equals()".(öí©ÿÿÿÿÿ8ó‚Ü¤1
+^
+java:S4973S"<Strings and Boxed types should be compared using "equals()".(öí©ÿÿÿÿÿ8ó‚Ü¤1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ëÆæôøÿÿÿÿ8ô‚Ü¤1
+e
+java:S2259‹"GA "NullPointerException" could be thrown; "statement" is nullable here.(³úÀ‹8Ú…Ü¤1
+j
+java:S2259‰"GA "NullPointerException" could be thrown; "statement" is nullable here.(Ë³Èúÿÿÿÿ8Ú…Ü¤1
+j
+java:S2095©"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8Ú…Ü¤1
+j
+java:S2095ğ"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8Ú…Ü¤1
+r
+java:S2095œ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(–£Ùşÿÿÿÿ8Ú…Ü¤1
+j
+java:S2095Î"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8Ú…Ü¤1
+W
+java:S1118":Add a private constructor to hide the implicit public one.(‚÷íœ8Û…Ü¤1
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(ı‰ŒÜ8Ü…Ü¤1
+Z	java:S1068"9Replace this use of System.out or System.err by a logger.(Ô¨Á­ûÿÿÿÿ8Ş…Ü¤1
+Z	java:S106:"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8Ş…Ü¤1
+T	java:S106;"9Replace this use of System.out or System.err by a logger.(«Şˆ!8Ş…Ü¤1
+t
+java:S3776M"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(¶ıÜ©ùÿÿÿÿ8ß…Ü¤1
+U	java:S106m"9Replace this use of System.out or System.err by a logger.(ëŸ‘µ8á…Ü¤1
+Z	java:S106o"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8â…Ü¤1
+U	java:S106p"9Replace this use of System.out or System.err by a logger.(“éˆñ8ã…Ü¤1
+[	java:S106…"9Replace this use of System.out or System.err by a logger.(ßâŸúùÿÿÿÿ8ã…Ü¤1
+[	java:S106‡"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ã…Ü¤1
+[	java:S106ˆ"9Replace this use of System.out or System.err by a logger.(Éã«¿ıÿÿÿÿ8ã…Ü¤1
+[	java:S106°"9Replace this use of System.out or System.err by a logger.(ØÏÃ±øÿÿÿÿ8ä…Ü¤1
+[	java:S106²"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8å…Ü¤1
+[	java:S106¶"9Replace this use of System.out or System.err by a logger.(”Ìıÿÿÿÿ8å…Ü¤1
+[	java:S106·"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8å…Ü¤1
+[	java:S106¿"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8å…Ü¤1
+V	java:S106À"9Replace this use of System.out or System.err by a logger.(ºŒ¯ì8å…Ü¤1
+[	java:S106Ô"9Replace this use of System.out or System.err by a logger.(ØÏÃ±øÿÿÿÿ8ç…Ü¤1
+[	java:S106Ö"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8¨¿Ü¤1
+[	java:S106Ú"9Replace this use of System.out or System.err by a logger.(”Ìıÿÿÿÿ8ÊğÜ¤1
+[	java:S106Û"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8œ–Ü¤1
+[	java:S106à"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8®²Ü¤1
+[	java:S106á"9Replace this use of System.out or System.err by a logger.(ŸÉéÜşÿÿÿÿ8ØÔÜ¤1
+[	java:S106ÿ"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8âµ¢ë¤1
+V	java:S106€"9Replace this use of System.out or System.err by a logger.(÷ã”®8áĞ£ë¤1

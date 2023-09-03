@@ -5,7 +5,7 @@ build/
 !**/src/test/**/build/
 
 /money_statements
-/account_ststements
+/account_statements
 /checks
 
 ### IntelliJ IDEA ###

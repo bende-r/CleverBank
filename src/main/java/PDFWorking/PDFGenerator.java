@@ -11,10 +11,25 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Класс для создания PDF документов
+ *
+ * @author Богдан Рыбаков
+ * @version 1.0
+ */
+
 public class PDFGenerator {
-    public static void generatePDF(ArrayList<String> text) {
+
+    /**
+     * Метод для создания PDF-документа
+     *
+     * @param text       - текст документа
+     * @param folderName - папка, в которой будет размещаться файл
+     * @param fileName   - имя создаваемого файла
+     */
+    public static void generatePDF(ArrayList<String> text, String folderName, String fileName) {
         try {
-            LocalDateTime localDateTime = LocalDateTime.now();
+            //Создание документа
             PDDocument document = new PDDocument();
             PDPage page = new PDPage(PDRectangle.A4);
             document.addPage(page);
@@ -22,11 +37,12 @@ public class PDFGenerator {
 
             contentStream.setFont(PDType1Font.COURIER, 12);
 
-            float marginX = 50; // Left margin
-            float startY = page.getMediaBox().getHeight() - 50; // Top margin
-            float lineHeight = 15; // Height of each row
-            int numRows = text.size(); // Number of rows
+            float marginX = 50;
+            float startY = page.getMediaBox().getHeight() - 50;
+            float lineHeight = 15;
+            int numRows = text.size();
 
+            //Заполнение документа текстом
             for (int i = 0; i < numRows; i++) {
                 float y = startY - i * lineHeight;
                 contentStream.beginText();
@@ -37,18 +53,17 @@ public class PDFGenerator {
 
             contentStream.close();
 
-            File folder = new File("checks");
+            //Создание папки, если она не существует
+            File folder = new File(folderName);
             if (!folder.exists())
                 folder.mkdir();
 
-
-            File file = new File("checks/" + localDateTime.getDayOfMonth() + "-" + localDateTime.getMonthValue() +
-                    "-" + localDateTime.getYear() + "-" + localDateTime.getHour() + "-" + localDateTime.getMinute() + "-"
-                    + localDateTime.getSecond() + ".pdf");
+            //Создание и сохранение документа
+            File file = new File(folderName + "/" + fileName + ".pdf");
             document.save(file);
             document.close();
 
-            System.out.println("PDF файл создан и сохранен в " + file.getAbsolutePath());
+            System.out.println("PDF-file is created and saved in " + file.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,5 @@
 package DataOperations;
 
-import CustomExceptions.OperationException;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,13 +7,29 @@ import java.util.ArrayList;
 import static DataOperations.CRUD.getColNames;
 import static DataOperations.CRUD.insertRow;
 
+/**
+ * Класс, реализующий операции со счетами (пополнение, списание, перевод между счетами)
+ *
+ * @author Богдан Рыбаков
+ * @version 1.0
+ */
+
 public class ScoreOperations {
+    /**
+     * Метод, реализуюший операцию пополнения счёта или списания (если вносимая сумма отрицательна).
+     * В методе реализована SQL транзакция, при возникновении ошибки, все изменения откатываются.
+     *
+     * @param connection  - соединение с базой данных
+     * @param scoreNumber - номер счёта
+     * @param deposit     - вносимая сумма
+     * @return - при успешном выполнении операции возвращает True, иначе False
+     * @throws SQLException
+     */
     public static boolean addingFunds(Connection connection, String scoreNumber, double deposit) throws SQLException {
         boolean result = false;
         Statement statement = null;
         try {
             statement = connection.createStatement();
-
             statement.executeUpdate("BEGIN; " +
                     "UPDATE postgres.cleverbank.scores SET balance = balance + (" + deposit + ")::money " +
                     "WHERE score_number = '" + scoreNumber + "'::text; " +
@@ -32,6 +46,18 @@ public class ScoreOperations {
         }
     }
 
+    /**
+     * Метод, реализующий перевод между счетами.
+     * В методе реализована SQL транзакция, при возникновении ошибки, все изменения откатываются.
+     * При успешном выполнении транзакции добавляет запись в таблицу Transactions {@link CRUD#insertRow(Connection, ArrayList, String, ArrayList)}
+     *
+     * @param connection  - соединение с базой данных
+     * @param inputScore  - счёт получателя
+     * @param outputScore - счёт отправителя
+     * @param deposit     - сумма перевода
+     * @return - при успешном выполнении операции возвращает True, иначе False
+     * @throws SQLException
+     */
     public static boolean trasfer(Connection connection, String inputScore, String outputScore, double deposit) throws SQLException {
         boolean result = false;
 
@@ -58,6 +84,7 @@ public class ScoreOperations {
             if (deposit <= outputbalance) {
                 statement.executeUpdate(command);
 
+                //Добавление записи в таблицу с транзакциями
                 insertRow(connection, data, "transactions", colNames);
             } else {
                 System.out.println("Amount being debited exceeds the score balance");
@@ -65,7 +92,6 @@ public class ScoreOperations {
 
             result = true;
             System.out.println("Transfer was complite");
-
 
         } catch (SQLException e) {
             statement.executeUpdate("ROLLBACK;");
@@ -75,6 +101,14 @@ public class ScoreOperations {
         }
     }
 
+    /**
+     * Метод, реализующий получение баланса счёта
+     *
+     * @param connection  - соединение с базой данных
+     * @param scoreNumber - номер счёта
+     * @return - возвращает значение баланса счёта
+     * @throws SQLException
+     */
     public static float getBalance(Connection connection, String scoreNumber) throws SQLException {
         PreparedStatement preparedStatement = null;
         float balance = 0.0F;

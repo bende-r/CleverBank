@@ -1,5 +1,8 @@
 package com.CleverBank;
 
+import JDBC.SQLFileExecuter;
+
+import java.io.File;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,14 +14,26 @@ import static DataOperations.CRUD.*;
 import static DataOperations.ScoreOperations.*;
 import static java.sql.DriverManager.getConnection;
 
-
+/**
+ * Главный класс приложение CleverBank
+ *
+ * @author Богдан Рыбаков
+ * @version 1.0
+ */
 public class CleverBankApp {
+    //Адрес для подключения к PostgreSQL
     static final String DB_URL = "jdbc:postgresql://localhost:5432/";
-    static final String USER = "postgres";
-    static final String PASS = "postgres";
+
     static Scanner in = new Scanner(System.in);
 
+    /**
+     * Точка входа в программу
+     *
+     * @param argv
+     */
     public static void main(String[] argv) {
+
+        //Проверка наличия драйвера, для подключения и управления базами данных PostgreSQL
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -28,27 +43,29 @@ public class CleverBankApp {
         }
 
         System.out.println("PostgreSQL JDBC Driver successfully connected");
-        /*
+
+        //Имя пользователя PostgreSQL
         System.out.println("Enter PostgreSQL Username:");
         final String USER = in.nextLine();
 
+        //Пароль
         System.out.println("Enter password:");
         final String PASS = in.nextLine();
-*/
+
         try {
+            //Создание подключения к базе данных
             Connection connection = getConnection(DB_URL, USER, PASS);
 
-
             System.out.println("You are connected to the database");
-/*
+
             System.out.print("Generate a database? Y/N\n");
             String c = in.nextLine();
 
-
+            //Запрос на создание базы данных. Запускается скрипт из файла
             try {
                 if (c.toLowerCase().equals("y")) {
                     String path = new File("src/main/sql/createdb.sql").getAbsolutePath();
-                    SQLFileExecuter.sqlfileexecuter(path, connection);
+                    SQLFileExecuter.sqlFileExecuter(path, connection);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -57,21 +74,24 @@ public class CleverBankApp {
             System.out.print("Fill the database with information? Y/N\n");
             c = in.nextLine();
 
+            //Запрос на заполнение базы данных нформацией. Запускается скрипт из файла
             try {
                 if (c.toLowerCase().equals("y")) {
                     String path = new File("src/main/sql/filldb.sql").getAbsolutePath();
-                    SQLFileExecuter.sqlfileexecuter(path, connection);
+                    SQLFileExecuter.sqlFileExecuter(path, connection);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
-*/
             int point;
+
+            //Главный цикл программы
             loop:
             while (true) {
                 printMenu();
 
+                //Выбор пункта меню
                 try {
                     String p = in.next();
                     point = Integer.parseInt(p);
@@ -82,18 +102,20 @@ public class CleverBankApp {
 
                 switch (point) {
                     case 1:
+                        //Переход к меню операций со счетами
                         scoreMenu(connection);
                         break;
                     case 2:
+                        //Переход к меню операций с таблицами
                         tableMenu(connection);
                         break;
 
                     case 3:
+                        //Получение выписок по счетам пользователей
                         System.out.println("Enter the id of the user whose statement you want to receive:");
                         try {
                             String id = in.next();
                             int user_id = Integer.parseInt(id);
-
 
                             System.out.println("Select the period for which you want to receive a statement");
                             System.out.println("1. Last month");
@@ -103,7 +125,7 @@ public class CleverBankApp {
                             String per = in.next();
                             int period = Integer.parseInt(per);
                             LocalDateTime startPeriod, endPeriod = LocalDateTime.now();
-
+                            //Выбор периода для получения выписки
                             switch (period) {
                                 case 1:
                                     startPeriod = endPeriod.minusMonths(1);
@@ -112,9 +134,8 @@ public class CleverBankApp {
                                     startPeriod = endPeriod.minusYears(1);
                                     break;
                                 default:
-                                    startPeriod = LocalDateTime.MIN;
+                                    startPeriod = endPeriod.minusYears(20);
                             }
-
 
                             generateAccountStatement(connection, user_id, startPeriod, endPeriod);
                         } catch (Exception e) {
@@ -122,11 +143,9 @@ public class CleverBankApp {
                         }
                         break;
                     case 4:
-
                         break loop;
                     default:
                         System.out.println("Invalid point");
-
                 }
             }
 
@@ -138,13 +157,22 @@ public class CleverBankApp {
         }
     }
 
+    /**
+     * Метод, запускающий меню работы с таблицами
+     *
+     * @param connection - соединение с базой данных
+     */
+
     public static void tableMenu(Connection connection) {
         int point;
         String tableName, field, value;
 
         loop:
         while (true) {
+            //Вывод пунктов меню
             printTableMenu();
+
+            //Считывание выбранного пункта
             try {
                 String p = in.next();
                 point = Integer.parseInt(p);
@@ -154,6 +182,7 @@ public class CleverBankApp {
             }
 
             switch (point) {
+                //Вывод таблицы
                 case 1:
                     try {
                         printTableList();
@@ -166,6 +195,8 @@ public class CleverBankApp {
                         System.out.println(e.getMessage());
                     }
                     break;
+
+                //Вывод записи из таблицы
                 case 2:
                     try {
                         printTableList();
@@ -182,6 +213,8 @@ public class CleverBankApp {
                         System.out.println(e.getMessage());
                     }
                     break;
+
+                //Добавление записи в таблицу
                 case 3:
                     try {
                         printTableList();
@@ -202,11 +235,13 @@ public class CleverBankApp {
                         System.out.println(e.getMessage());
                     }
                     break;
+
+                //Удаление записи из таблицы
                 case 4:
                     try {
                         int id;
                         printTableList();
-                        System.out.print("Enter the name of the table you want to add the entry to:");
+                        System.out.print("Enter the name of the table you want to delete an entry to:");
                         tableName = in.next();
                         System.out.print("Enter the ID of the record you want to delete:");
                         id = in.nextInt();
@@ -218,6 +253,8 @@ public class CleverBankApp {
                         System.out.println(e.getMessage());
                     }
                     break;
+
+                //Изменение записи в таблице
                 case 5:
                     try {
                         printTableList();
@@ -241,16 +278,20 @@ public class CleverBankApp {
                         System.out.println(e.getMessage());
                     }
                     break;
+                //Прекращение работы меню таблиц
                 case 6:
                     break loop;
                 default:
                     System.out.println("Invalid point");
             }
-
         }
-
     }
 
+    /**
+     * Метод, запускающий меню работы со счетами
+     *
+     * @param connection - соединение с базой данных
+     */
     public static void scoreMenu(Connection connection) {
         int point;
         double deposit;
@@ -259,7 +300,10 @@ public class CleverBankApp {
 
         loop:
         while (true) {
+            //Вывод пунктов меню
             printScoreOperationsMenu();
+
+            //Счтывание выбранного пункта
             try {
                 String p = in.next();
                 point = Integer.parseInt(p);
@@ -269,13 +313,12 @@ public class CleverBankApp {
             }
 
             switch (point) {
+                //Пополнение счёта
                 case 1:
                     try {
                         System.out.print("Enter score number:");
                         scoreNumber = in.next();
-
                         System.out.print("Enter deposit amount:");
-
                         try {
                             String d = in.next();
                             deposit = Double.parseDouble(d);
@@ -283,7 +326,6 @@ public class CleverBankApp {
                             e.getMessage();
                             break;
                         }
-
                         if (deposit <= 0) {
                             System.out.println("Invalid deposit value");
                             break;
@@ -300,17 +342,20 @@ public class CleverBankApp {
                             data.add(Double.toString(deposit));
                             data.add("" + localDateTime.getYear() + "-" + "" + localDateTime.getMonth() +
                                     "-" + localDateTime.getDayOfMonth() + " " + localDateTime.getHour() +
-                                    ":" + localDateTime.getSecond());
+                                    ":" + localDateTime.getMinute() + ":" + localDateTime.getSecond());
                             data.add("DEPOSIT");
                             data.add(scoreNumber);
 
+                            //Добавление записи в таблицу с транзакциями
                             insertRow(connection, data, "transactions", colNames);
+                            //Создание чека
                             generateDepositCheck(connection, scoreNumber, deposit);
                         }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
+                //Снятие средств со счёта
                 case 2:
                     try {
                         System.out.print("Enter score number:");
@@ -329,10 +374,12 @@ public class CleverBankApp {
                             System.out.println("Invalid deposit value");
                             break;
                         }
+                        //Проверка на то, хвататет ли средств для списания
                         if (deposit > getBalance(connection, scoreNumber)) {
                             System.out.println("Amount being debited exceeds the score balance");
                             break;
                         } else {
+                            //Снятие средств
                             addingFunds(connection, scoreNumber, deposit * (-1));
 
                             ArrayList<String> data = new ArrayList<String>();
@@ -347,15 +394,16 @@ public class CleverBankApp {
                                     ":" + localDateTime.getSecond());
                             data.add(scoreNumber);
                             data.add("DEBITING");
-
+                            //Добавление записи в таблицу с транзакциями
                             insertRow(connection, data, "transactions", colNames);
+                            //Создание чека
                             generateDebitingCheck(connection, scoreNumber, deposit);
                         }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-
+                //Перевод со счёта на счёт
                 case 3:
                     try {
                         System.out.print("Enter input score number:");
@@ -372,13 +420,12 @@ public class CleverBankApp {
                             e.getMessage();
                             break;
                         }
-
                         if (deposit <= 0) break;
-
+                        //Выполнение операции перевода
                         boolean res = trasfer(connection, scoreNumber, outputScore, deposit);
+                        //Создание чека
                         if (res)
                             generateTransactionCheck(connection, scoreNumber, outputScore, deposit);
-
                     } catch (SQLException e) {
                         System.out.println("Transfer operation failed");
                     } catch (Exception e) {
@@ -386,15 +433,18 @@ public class CleverBankApp {
                         break;
                     }
                     break;
+                //Прекращение работы меню операций со счетами
                 case 4:
                     break loop;
-
                 default:
                     System.out.println("Invalid point");
             }
         }
     }
 
+    /**
+     * Метод, выводящий список пунтов с операциями со счётом
+     */
     public static void printScoreOperationsMenu() {
         System.out.println("\n------Score operations menu------");
         System.out.println("1. Deposit funds to the account");
@@ -403,6 +453,9 @@ public class CleverBankApp {
         System.out.println("4. Exit\n");
     }
 
+    /**
+     * Метод, выводящий главное меню программы
+     */
     public static void printMenu() {
         System.out.println("\n---------Menu---------");
         System.out.println("1. Score operations");
@@ -412,6 +465,9 @@ public class CleverBankApp {
         System.out.println();
     }
 
+    /**
+     * Метод, выводящий список таблиц
+     */
     public static void printTableList() {
         System.out.println("\n-----Tables list-----");
         System.out.println("Banks");
@@ -420,6 +476,9 @@ public class CleverBankApp {
         System.out.println("Transactions\n");
     }
 
+    /**
+     * Метод, выводящий список пунктов операций с таблцами
+     */
     public static void printTableMenu() {
         System.out.println("\n---------Tables---------");
         System.out.println("1. Show tables");
@@ -429,5 +488,4 @@ public class CleverBankApp {
         System.out.println("5. Edit an entry in the table");
         System.out.println("6. Exit\n");
     }
-
 }

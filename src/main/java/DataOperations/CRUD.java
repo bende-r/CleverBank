@@ -3,7 +3,24 @@ package DataOperations;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Класс, реализующий универсальные методы CRUD для работы с базами данных
+ *
+ * @author Богдан Рабыков
+ * @version 1.0
+ */
 public class CRUD {
+
+    /**
+     * Универсальный метод, реализующий операцию добавления строки в таблицу в базе данных.
+     * В методе реализована SQL транзакция, при возникновении ошибки, все изменения откатываются.
+     *
+     * @param connection - соединение с базой данных
+     * @param data       - данные, которые необходимо добавить в таблицу
+     * @param tableName  - имя таблицы, в которую необходимо добавить данные
+     * @param colNames   - имена столбцов в таблице
+     * @throws SQLException
+     */
     public static void insertRow(Connection connection, ArrayList<String> data, String tableName, ArrayList<String> colNames) throws SQLException {
         Statement statement = null;
         try {
@@ -15,7 +32,6 @@ public class CRUD {
                     command = command + " " + colNames.get(i) + ", ";
                 else
                     command = command + " " + colNames.get(i) + " ";
-
             }
 
             command = command + " ) VALUES ( ";
@@ -24,14 +40,12 @@ public class CRUD {
                 if (tryParseInt(data.get(i)) || tryParseDouble(data.get(i))) {
                     if (data.size() - 1 == i) {
                         command = command + " " + data.get(i) + " )";
-
                     } else {
                         command = command + " " + data.get(i) + ", ";
                     }
                 } else {
                     if (data.size() - 1 == i) {
                         command = command + " \'" + data.get(i) + "\' )";
-
                     } else {
                         command = command + " \'" + data.get(i) + "\', ";
                     }
@@ -50,6 +64,16 @@ public class CRUD {
         }
     }
 
+    /**
+     * Универсальный метод, реализующий операцию обновления строки таблицы в базе данных.
+     * В методе реализована SQL транзакция, при возникновении ошибки, все изменения откатываются.
+     *
+     * @param connection - соединение с базой данных
+     * @param data       - данные, которые необходимо внести
+     * @param tableName  - имя таблицы
+     * @param colNames   - имена столбцов
+     * @throws SQLException
+     */
     public static void updateRow(Connection connection, ArrayList<String> data, String tableName, ArrayList<String> colNames) throws SQLException {
         Statement statement = null;
         try {
@@ -92,6 +116,15 @@ public class CRUD {
         }
     }
 
+    /**
+     * Mетод, реализующий операцию удаление строки из таблицы в базе данных.
+     * В методе реализована SQL транзакция, при возникновении ошибки, все изменения откатываются.
+     *
+     * @param connection - соединение с базой данных
+     * @param tableName  - название таблицы
+     * @param id         - идентификатор строки, которую необходимо удалить
+     * @throws SQLException
+     */
     public static void deleteRow(Connection connection, String tableName, int id) throws SQLException {
         Statement statement = null;
         try {
@@ -102,12 +135,20 @@ public class CRUD {
             System.out.println(e.getMessage());
             System.out.println("Delete operation failed");
             statement.executeUpdate("ROLLBACK;");
-
         } finally {
             statement.close();
         }
     }
 
+    /**
+     * Метод, реализующий выбор строк из таблицы в базе данных по определённому полю и значению
+     *
+     * @param connection - соединение с базой данных
+     * @param tableName  - название таблицы
+     * @param field      - поле по которому происходит выбор
+     * @param value      - значение по которому происходит выбор
+     * @throws SQLException
+     */
     public static void selectRow(Connection connection, String tableName, String field, String value) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
@@ -152,6 +193,13 @@ public class CRUD {
         }
     }
 
+    /**
+     * Метод, реализующий отображение таблицы
+     *
+     * @param connection - соединение с базой данных
+     * @param tableName  - название таблицы
+     * @throws SQLException
+     */
     public static void showTable(Connection connection, String tableName) throws SQLException {
         Statement statement = null;
         try {
@@ -178,6 +226,13 @@ public class CRUD {
         }
     }
 
+    /**
+     * Метод, получающий название столбцов в таблице
+     *
+     * @param connection - соединение с базой данных
+     * @param tableName  - название таблицы
+     * @return
+     */
     public static ArrayList<String> getColNames(Connection connection, String tableName) {
         Statement statement = null;
         ArrayList<String> colNames = null;
@@ -203,7 +258,12 @@ public class CRUD {
         return colNames;
     }
 
-
+    /**
+     * Метод, проверяющий является ли строка числом типа Integer
+     *
+     * @param str - исходная строка
+     * @return - в случае если строка является число возвращает True, иначе False
+     */
     private static boolean tryParseInt(String str) {
         try {
             Integer.parseInt(str);
@@ -213,6 +273,12 @@ public class CRUD {
         }
     }
 
+    /**
+     * Метод, проверяющий является ли строка числом типа Double
+     *
+     * @param str - исходная строка
+     * @return - в случае если строка является число возвращает True, иначе False
+     */
     private static boolean tryParseDouble(String str) {
         try {
             Double.parseDouble(str);

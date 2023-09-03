@@ -1,7 +1,0 @@
-
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ú‚®Šùÿÿÿÿ8ÇêÉò£1
-n
-java:S2095
-"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(æù§…ıÿÿÿÿ8‰ëÉò£1
-
-java:S1149	"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(ñ¤Ëáøÿÿÿÿ8ëÉò£1

@@ -7,30 +7,22 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Класс, реализующий метод, считывающий и исполняюший SQL-файл
+ *
+ * @author Богдан Рыбаков
+ * @version 1.0
+ */
 public class SQLFileExecuter {
 
-  /*  public static void SQLFileExecute(String path, Statement statement) throws SQLException, IOException {
-
-        BufferedReader reader = new BufferedReader(new FileReader(path));
-        String line;
-        StringBuilder sqlQuery = new StringBuilder();
-
-        while ((line = reader.readLine()) != null) {
-            sqlQuery.append(line);
-
-            // Если строка завершается точкой с запятой, выполните SQL-запрос
-            if (line.trim().endsWith(";")) {
-                String query = sqlQuery.toString();
-                statement.executeUpdate(query);
-
-                // Очистите буфер для следующего запроса
-                sqlQuery.setLength(0);
-            }
-        }
-        reader.close();
-    }*/
-
-    public static void sqlfileexecuter(String path, Connection connection) throws SQLException {
+    /**
+     * Метод, считывающий и исполняющий SQL-файл
+     *
+     * @param path       - путь к файлу
+     * @param connection - подключение к базе данных
+     * @throws SQLException
+     */
+    public static void sqlFileExecuter(String path, Connection connection) throws SQLException {
         Statement statement = null;
         try {
             statement = connection.createStatement();
